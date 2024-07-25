@@ -1,0 +1,128 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border: 0.1em solid #787878;
+  border-radius: 0.4em;
+  margin: 1%; 
+  width: 15vw;
+  height: 40vh;
+  box-shadow: 0 0.8em 1.6em rgba(0, 0, 0, 0.6), 0 0.4em 0.8em rgba(0, 0, 0, 0.3);
+  text-align: center;
+  background-color: rgb(171, 171, 249);
+  transition: transform 0.3s, width 0.3s, height 0.3s;
+  overflow: hidden;
+  position: relative;
+}
+
+.product-card.expanded {
+  width: 30vw;
+  height: 80vh;
+  transform: scale(1.1);
+  align-items: flex-start; /* Align items to the top left */
+}
+
+.product-card.expanded .product-image {
+  width: 40%;
+  height: 40%;
+  position: absolute; /* Position the image absolutely */
+  top: 1em; /* Adjust as needed for spacing */
+  left: 1em; /* Adjust as needed for spacing */
+}
+
+.product-card.expanded .product-price {
+  font-size: 2.5em;
+  margin-top: 1em; /* Adjust as needed for spacing */
+}
+
+.product-card.expanded .product-title {
+  font-size: 1.5em;
+  margin-top: 1em; /* Adjust as needed for spacing */
+}
+
+.product-card.expanded .product-description {
+  font-size: 1em;
+  display: block;
+  margin-top: 1em; /* Adjust as needed for spacing */
+}
+
+.product-card:hover {
+  background-color: rgb(137, 137, 255);
+  cursor: pointer;
+  transform: scale(1.04);
+  transition: transform 0.3s;
+}
+
+.product-image {
+  width: 80%;
+  height: auto;
+  max-height: 50%;
+  object-fit: contain;
+  background-color: white;
+  border: 0.1em solid #d1d1d1;
+  border-radius: 0.2em;
+  margin-top: 0.5em;
+}
+
+.product-price {
+  width: 90%;
+  padding: 0.5em;
+  font-size: 1.8em;
+  overflow: hidden;
+}
+
+.product-title {
+  width: 90%;
+  padding: 0.5em;
+  font-size: 1em;
+  overflow: hidden;
+  margin-bottom: 1em;
+}
+
+.product-description {
+  width: 90%;
+  padding: 0.5em;
+  font-size: 0.8em;
+  overflow: auto;
+  display: none;
+  padding-left: 8%;
+}
+
+.product-details {
+  display: none;
+  width: 100%;
+}
+
+.product-card.expanded .product-details {
+  display: block;
+}
+
+.close-button {
+  display: none;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 0.5em;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.product-card.expanded .close-button {
+  display: block;
+}

@@ -1,0 +1,13 @@
+*{
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+}
+
+.Home{
+    padding-top: 1%;
+    padding-bottom: 10%;
+    padding-left: 6%;
+    padding-right: 1%;
+    background-color: rgb(224, 236, 255);
+}

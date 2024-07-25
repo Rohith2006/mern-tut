@@ -3,13 +3,15 @@ const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
 const User = require('./models/user.model.js'); // Import the User model
+const Product = require('./models/product.js'); // Import the Product model
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
 // MongoDB URI
-const mongoURI = 'mongodb+srv://rohiththirunagari515:rohith2006@cluster0.hnltawe.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+const mongoURI = 'mongodb+srv://rohiththirunagari515:rohith2006@cluster0.hnltawe.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+
 // Connect to MongoDB
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
@@ -43,6 +45,45 @@ app.post('/api/register', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+app.post('/product/post', async (req, res) => {
+  try {
+    const { title, image, description, price } = req.body;
+
+    // Check if all required fields are provided
+    if (!title || !image || !description || !price) {
+      return res.status(400).json({ msg: 'Please enter all fields' });
+    }
+
+    // Check if the product already exists
+    const existingProduct = await Product.findOne({ image, title });
+    if (existingProduct) {
+      return res.status(400).json({ msg: 'Product already exists' });
+    }
+
+    // Create a new product
+    const newProduct = new Product({ title, image, description, price });
+    await newProduct.save();
+
+    res.json({ message: 'Product listed successfully', product: newProduct });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// server.js
+
+app.get('/products', async (req, res) => {
+  try {
+    const products = await Product.find();
+    res.json(products);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 
 app.get('/hello', (req, res) => {
   res.send('hello page');
